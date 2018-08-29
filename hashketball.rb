@@ -1,3 +1,5 @@
+require pry
+
 def game_hash
   {
     home: {
@@ -135,4 +137,48 @@ def shoe_size(playerName)
       end
     end
   end
+end
+
+def team_colors(teamName)
+  game_hash.each do |team, team_infos|
+    if game_hash[team][:team_name] == teamName
+       return game_hash[team][:colors]
+    end
+  end
+end
+
+def team_names
+  teams = []
+  game_hash.each do |team, team_infos|
+    teams << game_hash[team][:team_name]
+  end
+  return teams
+end
+
+def player_numbers(teamName)
+  jersey = []
+  game_hash.each do |team, team_infos|
+    game_hash[team][:players].each do |player|
+      if game_hash[team][:team_name] == teamName
+       jersey << player[:number]
+      end
+    end
+  end
+  return jersey
+end
+
+def player_stats(playerName)
+  stats = {}
+  game_hash.each do |team, team_infos|
+    game_hash[team][:players].each do |player|
+      if player[:player_name] == playerName
+        binding.pry
+       stats = [player]
+      end
+    end
+  end
+  return stats
+end
+
+def big_shoe_rebounds
 end
