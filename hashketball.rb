@@ -176,7 +176,7 @@ def player_stats(playerName)
       end
     end
   end
-  return stats.delete_if {|key, value| key == :player_name}
+  return stats #.delete(:player_name)
 end
 
 def big_shoe_rebounds
