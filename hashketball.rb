@@ -167,17 +167,27 @@ def player_numbers(teamName)
   return jersey
 end
 
-def player_stats(playerName)
-  stats = {}
+def player_stats(player_name)
   game_hash.each do |team, team_infos|
-    game_hash[team][:players].each do |player, stat|
-      if player[:player_name] == playerName
-       stats[player] = stat
+    game_hash[team][:players].each do |player|
+      if player[:player_name] == player_name
+        player.delete(:player_name)
+        return player
       end
     end
   end
-  return stats #.delete(:player_name)
 end
 
 def big_shoe_rebounds
+  biggest_shoe = 0
+  rebounds_shoe = 0
+  game_hash.each do |team, team_infos|
+    game_hash[team][:players].each do |player|
+      if player[:shoe] > biggest_shoe
+        biggest_shoe = player[:shoe]
+        rebounds_shoe = player[:rebounds]
+      end
+    end
+  end
+  rebounds_shoe
 end
