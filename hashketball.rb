@@ -170,13 +170,13 @@ end
 def player_stats(playerName)
   stats = {}
   game_hash.each do |team, team_infos|
-    game_hash[team][:players].each do |player|
+    game_hash[team][:players].each do |player, stat|
       if player[:player_name] == playerName
-       stats = [player]
+       stats[player] = stat
       end
     end
   end
-  return stats
+  return stats.delete_if {|key, value| key == :player_name}
 end
 
 def big_shoe_rebounds
